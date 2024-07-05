@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/refurb
+    username: root
+    password: Hda77063!!@
+    initialization-mode: never
+    hikari.connectionTimeout: 10000
+    hikari.minimum-idle: 10
+    hikari.maximum-pool-size: 10
+    hikari.idle-timeout: 10000
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true

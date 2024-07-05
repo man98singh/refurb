@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: Transport Houston Direct Auto Refurb Application
+    version: 1.0.01
+    powered: Transport Houston Direct Auto Refurb
+  profiles:
+    active:
+    - dev
+spring.mail.host: smtp.gmail.com
+spring.mail.port: 587
+spring.mail.username: bharat.developer1993@gmail.com
+spring.mail.password: jmsclfixjucuuimz
+
+# Other properties
+spring.mail.properties.mail.smtp.auth: true
+spring.mail.properties.mail.smtp.connectiontimeout: 5000
+spring.mail.properties.mail.smtp.timeout: 5000
+spring.mail.properties.mail.smtp.writetimeout: 5000
+
+# TLS , port 587
+spring.mail.properties.mail.smtp.starttls.enable: true
+jwt.secret: transport@123!!
+
+s3-properties:
+  endpoint-URL: https://s3.us-east-2.amazonaws.com
+  region: us-east-2
+  access-key: AKIATW5UUDL4TP4RSOVG
+  secret-key: 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
+  bucket-name: transportsite
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+logging:
+  level:
+    org.springframework.aop: ERROR
+    com.houstondirectauto.transport: INFO   
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"  
+  file:
+    max-size:
+      10MB
+    name: 
+      transportLog.log
+api:
+  email:
+    templates:
+      location: /templates/  
+springdoc:
+  swagger-ui:
+    path=/swagger-ui:
+      html:
+
+spring.servlet.multipart.max-file-size: 128MB
+spring.servlet.multipart.max-request-size: 128MB
+spring.servlet.multipart.enabled: true
