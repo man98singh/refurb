@@ -1,8 +1,8 @@
 spring:
   application:
-    name: Transport Houston Direct Auto Refurb Application
+    name: Refurb
     version: 1.0.01
-    powered: Transport Houston Direct Auto Refurb
+    powered: Houston Direct Auto
   profiles:
     active:
     - dev
@@ -19,7 +19,7 @@ spring.mail.properties.mail.smtp.writetimeout: 5000
 
 # TLS , port 587
 spring.mail.properties.mail.smtp.starttls.enable: true
-jwt.secret: transport@123!!
+jwt.secret: refurb@Hda77063!!@
 
 s3-properties:
   endpoint-URL: https://s3.us-east-2.amazonaws.com
@@ -44,7 +44,7 @@ logging:
     max-size:
       10MB
     name: 
-      transportLog.log
+      refurbLog.log
 api:
   email:
     templates:
