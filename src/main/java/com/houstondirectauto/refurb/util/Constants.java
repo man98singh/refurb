@@ -20,7 +20,7 @@ public class Constants {
 	 * Swagger Constants
 	 */
 	public static final String APP_TITLE = "Transport Houston Direct Refurb Backend App";
-	public static final String APP_DESCRIPTION = "Transport Houston Direct Auto Backend App.";
+	public static final String APP_DESCRIPTION = "Transport Houston Direct Refurb Backend App.";
 	public static final String APP_TERM_URL = "******";
 	public static final String APP_CONTACT_NAME = "******";
 	public static final String APP_CONTACT_URL = "******";
@@ -40,7 +40,7 @@ public class Constants {
 	public static final String NOT_FOUND_MESSAGE = "Not Found";
 	public static final String FORBIDDEN_USER_MESSAGE = "Forbidden user see error object for details";
 	public static final String ERROR_MESSAGE = "Something went wrong on the Server Side";
-	public static final String BEARER_AUTH = "bearerAuth";
+	public static final String BEARER_AUTH = "Authorization";
 
 	public static final String STATUS_CODE_OK = "200";
 	public static final String STATUS_CODE_CREATED = "201";
@@ -127,9 +127,9 @@ public class Constants {
 	public static final String VERIFY_USERNAME = "/verify/email";
 	public static final String USERNAME = "username";
 	public static final String VERIFY_OTP = "/verify/otp";
-	public static final String USER_TAGS = "user";
+	public static final String USER_TAGS = "4. user";
 
-	public static final String AUTH_TAGS = "auth";
+	public static final String AUTH_TAGS = "2. auth";
 	public static final String SOCIAL_TYPE = "SOCIAL";
 	public static final String NORMAL_TYPE = "NORMAL";
 	public static final String ACC_NOT_ACT = "User account does not activated, Please contact to administrator";
@@ -179,7 +179,7 @@ public class Constants {
 	public static final String ROLE = "/role";
 	public static final String ROLE_ID = "/{roleId}";
 	public static final String ROLES_ID = "roleId";
-	public static final String ROLE_TAGS = "role";
+	public static final String ROLE_TAGS = "3. role";
 	
 
     
@@ -204,7 +204,29 @@ public class Constants {
 	public static final String DELETE_FILE = "/delete";
 //	public static final String DOWNLOAD = "/{key}";
 	public static final String FILE_TAGS = "file-upload";
-	
+
+	/**
+	 * Vendor End Point Urls
+	 */
+	public static final String VENDOR = "/vendor";
+	public static final String VENDOR_BY_STORES = "/vendor/{storeId}";
+	public static final String VENDOR_ID = "/{vendorId}";
+	public static final String VENDORS_ID = "vendorId";
+	public static final String VENDOR_TAGS = "5. vendor";
+
+	// ERR_MSG
+	public static final String VENDOR_NOT_EXIST = "Vendor doesn't exist in the system";
+
+	/**
+	 * Department End Point Urls
+	 */
+	public static final String DEPARTMENT = "/department";
+	public static final String DEPARTMENT_ID = "/{departmentId}";
+	public static final String DEPARTMENTS_ID = "departmentId";
+	public static final String DEPARTMENT_TAGS = "6. department";
+
+	// ERR_MSG
+	public static final String DEPARTMENT_NOT_EXIST = "Department doesn't exist in the system";
 	/**
 	 * Shop End Point Urls
 	 */

@@ -2,6 +2,7 @@ package com.houstondirectauto.refurb.controller;
 
 import com.houstondirectauto.refurb.model.UserDTO;
 import com.houstondirectauto.refurb.proxy.AuthProxyService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

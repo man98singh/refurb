@@ -63,7 +63,7 @@ public class RoleController {
 	 * @param ip
 	 * @return list of User
 	 */
-	@Operation(summary = "Retrieve role", description = "Retrieve roles for  "+REFURB+"  system", security = @SecurityRequirement(name = BEARER_AUTH), tags = {
+	@Operation(summary = "Retrieve role", description = "Retrieve roles for  "+REFURB+"  system",  tags = {
 			ROLE_TAGS })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = STATUS_CODE_OK, description = SUCCESS_MESSAGE, content = @Content(schema = @Schema(implementation = RoleRequest.class), mediaType = "application/json")),
