@@ -19,15 +19,15 @@ public class Constants {
 	/**
 	 * Swagger Constants
 	 */
-	public static final String APP_TITLE = "Transport Houston Direct Refurb Backend App";
-	public static final String APP_DESCRIPTION = "Transport Houston Direct Refurb Backend App.";
+	public static final String APP_TITLE = "Houston Direct Refurb 2.0";
+	public static final String APP_DESCRIPTION = "Houston Direct - Refurb Application";
 	public static final String APP_TERM_URL = "******";
 	public static final String APP_CONTACT_NAME = "******";
 	public static final String APP_CONTACT_URL = "******";
 	public static final String APP_CONTACT_EMAIL = "******";
 	public static final String APP_LICENCESE = "******";
 	public static final String APP_LICENCESE_URL = "******";
-	public static final String APP_VERSION = "v1.0.0";
+	public static final String APP_VERSION = "v2.0.0";
 	
 	/**
 	 * Swagger constants

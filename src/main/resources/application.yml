@@ -1,14 +1,14 @@
 spring:
   application:
     name: Refurb
-    version: 1.0.01
+    version: 2.0
     powered: Houston Direct Auto
   profiles:
     active:
     - dev
 spring.mail.host: smtp.gmail.com
 spring.mail.port: 587
-spring.mail.username: bharat.developer1993@gmail.com
+spring.mail.username: rishiraj.thakur1995@gmail.com
 spring.mail.password: jmsclfixjucuuimz
 
 # Other properties
