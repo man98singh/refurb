@@ -76,7 +76,7 @@ public class SecurityConfig {
                         .requestMatchers("/liveness_check").permitAll()
                         .requestMatchers("/_ah/start").permitAll()
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/file/**", "/file/*", "/account/login", "/welcome", "/user**", "/user/**",
+                        .requestMatchers("/file/**", "/file/*", "/account/login", "/welcome", "/user**", "/user/**","/role**", "/role/**","/vendor**", "/vendor/**",
                                 "/user/verify/**", "/user/verify/otp/**", "/user/account/password", "/user/*",  "/file/upload",
                                 "/file/**").permitAll()
                         .anyRequest()

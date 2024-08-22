@@ -51,6 +51,7 @@ api:
       location: /templates/  
 springdoc:
   swagger-ui:
+    tagsSorter: alpha
     path=/swagger-ui:
       html:
 
