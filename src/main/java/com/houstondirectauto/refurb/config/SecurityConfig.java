@@ -70,6 +70,7 @@ public class SecurityConfig {
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exp -> exp.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .cors(c -> corsConfigurationSource())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/readiness_check").permitAll()
