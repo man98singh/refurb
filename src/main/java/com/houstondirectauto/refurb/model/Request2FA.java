@@ -1,13 +1,14 @@
 package com.houstondirectauto.refurb.model;
 
 public class Request2FA {
-    private String username;  // Changed to "username"
+    private Integer userId;  // Change this to Integer for user ID
 
-    public String getUsername() {
-        return username;
+    // Getter and setter for userId
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

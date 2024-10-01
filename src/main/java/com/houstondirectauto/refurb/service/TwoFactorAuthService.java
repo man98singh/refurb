@@ -1,7 +1,7 @@
 package com.houstondirectauto.refurb.service;
 
 public interface TwoFactorAuthService {
-    void sendCode(String username);  // Changed to "username"
+    String sendCode(Integer userId);  // Changed to "username"
 
-    boolean verifyCode(String username, String code);  // Changed to "username"
+     boolean verifyCode(Integer userId, String code);  // Changed to "username"
 }

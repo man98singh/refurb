@@ -55,6 +55,9 @@ public class UserEntity extends AbstractTimestampEntity implements Serializable 
     private String pinCode;
     private String rfIdBadgeId;
 	private Integer token;
+	@Column(name = "two_fa_code", length = 6)
+	private String twoFaCode;
+
 
 	@Column(length = 15, columnDefinition = "varchar(15) default 'ACTIVE'")
 	@Enumerated(EnumType.STRING)

@@ -61,12 +61,20 @@ public class AuthProxyService {
 	public UserDTO getCreateAuthenticationToken(String email,String password,String type) throws UsernameNotFoundException, UnauthorizedException, EntityNotFoundException {
 
 	UserEntity user = userService.findByUsername(email);
+
 	if(Objects.nonNull(user) && !user.getUserStatus().equals(UserStatus.ACTIVE)) {
 		throw new UnauthorizedException(ACC_NOT_ACT);
 	}
 	if(!type.equals(SOCIAL_TYPE)) {
 		authenticate(email, password);
 	}
+	// 2fa logic
+	if (user.getTwoFaCode() == null || user.getTwoFaCode().isEmpty()) {
+			userService.generateAndSave2FACode(user);  // genrating and saving against user ID
+
+		throw new UnauthorizedException("2FA code sent. Please provide the code.");
+		}
+
 	final UserDetails userDetails = userService.loadUserByUsername(email);
 
 	UserDTO jwtResponse = new UserDTO();
@@ -100,5 +108,9 @@ public class AuthProxyService {
 		} catch (BadCredentialsException e) {
 			throw new UnauthorizedException(INVALID_CREADTIALS);
 		}
+	}
+	public boolean verify2FACode(Integer userId, String inputCode) throws EntityNotFoundException {
+		UserEntity user = userService.findById(userId); // fetching userid
+		return userService.verify2FACode(user.getId(), inputCode);
 	}
 }
