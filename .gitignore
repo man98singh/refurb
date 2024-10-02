@@ -1,4 +1,5 @@
-HELP.md
+# HELP.md
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -34,3 +35,7 @@ refurbLog.log
 
 ### VS Code ###
 .vscode/
+
+### Excluded Files ###
+# Exclude application-dev.yml from version control
+application-dev.yml
