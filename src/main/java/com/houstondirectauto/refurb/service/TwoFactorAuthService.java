@@ -1,7 +1,9 @@
 package com.houstondirectauto.refurb.service;
 
-public interface TwoFactorAuthService {
-    String sendCode(Integer userId);  // Changed to "username"
+import com.houstondirectauto.refurb.exception.EntityNotFoundException;
 
-     boolean verifyCode(Integer userId, Long code);  // Changed to "username"
+public interface TwoFactorAuthService {
+    String sendCode(Integer userId) throws EntityNotFoundException;  // Changed to "username"
+
+     boolean verifyCode(Integer userId, Long code) throws EntityNotFoundException;  // Changed to "username"
 }

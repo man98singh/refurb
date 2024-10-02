@@ -40,8 +40,16 @@ public class TwoFactorAuthController {
     @PostMapping("/request")
     public ResponseEntity<String> request2FACode(@Valid @RequestBody Request2FA request) {
 
-        String generatedCode = twoFactorAuthService.sendCode(request.getUserId());
-        return ResponseEntity.ok("2FA code sent: " + generatedCode); // Include the generated code in the response
+        try {
+            String generatedCode = twoFactorAuthService.sendCode(request.getUserId());
+            return ResponseEntity.ok("2FA code sent: " + generatedCode); // Include the generated code in the response
+        } catch (EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the 2FA request.");
+        }
+
     }
 
     @Operation(summary = SUMMARY_2FA_VERIFY, description =DESCRIPTION_2FA_VERIFY )
@@ -52,15 +60,20 @@ public class TwoFactorAuthController {
             @ApiResponse(responseCode = STATUS_CODE_INTERNAL_ERROR, description = DESCRIPTION_SERVER_ERROR, content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/verify")
-    public ResponseEntity<Boolean> verify2FACode(@Valid @RequestBody Verify2FA verifyRequest) {
-        boolean isValid;
+    public ResponseEntity<String> verify2FACode(@Valid @RequestBody Verify2FA verifyRequest) {
         try {
 
-            isValid = twoFactorAuthService.verifyCode(verifyRequest.getUserId(), verifyRequest.getCode());
-        } catch (Exception e) {
+            boolean isValid = twoFactorAuthService.verifyCode(verifyRequest.getUserId(), verifyRequest.getCode());
+            if (!isValid) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(DESCRIPTION_2FA_MISMATCH);
+            }
+            return ResponseEntity.ok(DESCRIPTION_2FA_VERIFIED);
 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(DESCRIPTION_USER_NOT_FOUND);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(DESCRIPTION_2FA_SERVER_ERROR);
         }
-        return ResponseEntity.ok(isValid);
     }
 }
