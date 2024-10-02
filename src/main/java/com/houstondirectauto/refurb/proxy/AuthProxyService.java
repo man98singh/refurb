@@ -69,7 +69,7 @@ public class AuthProxyService {
 		authenticate(email, password);
 	}
 	// 2fa logic
-	if (user.getTwoFaCode() == null || user.getTwoFaCode().isEmpty()) {
+	if (user.getTwoFaCode() == null || user.getTwoFaCode()==0) {
 			userService.generateAndSave2FACode(user);  // genrating and saving against user ID
 
 		throw new UnauthorizedException("2FA code sent. Please provide the code.");

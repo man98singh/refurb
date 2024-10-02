@@ -13,42 +13,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
+import static com.houstondirectauto.refurb.util.Constants.*;
 
 @RestController
-@Tag(name = "7. Two Factor Authentication API")
 @RequestMapping("/2fa")
+@Validated
 public class TwoFactorAuthController {
 
     private final TwoFactorAuthService twoFactorAuthService;
+
 
     @Autowired
     public TwoFactorAuthController(TwoFactorAuthService twoFactorAuthService) {
         this.twoFactorAuthService = twoFactorAuthService;
     }
 
-    @Operation(summary = "Request 2FA Code", description = "Generates and sends a 2FA code to the user.")
+    @Operation(summary = SUMMARY_2FA_REQUEST, description =DESCRIPTION_2FA_REQUEST)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "2FA code sent successfully.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Bad request, invalid user ID.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "404", description = "User not found.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "500", description = "Internal server error.", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = STATUS_CODE_OK, description =DESCRIPTION_2FA_SENT, content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = STATUS_CODE_BAD_REQUEST, description = DESCRIPTION_BAD_REQUEST, content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = STATUS_NOT_FOUND, description = DESCRIPTION_USER_NOT_FOUND, content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = STATUS_CODE_INTERNAL_ERROR, description = DESCRIPTION_SERVER_ERROR, content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/request")
-    public ResponseEntity<String> request2FACode(@RequestBody Request2FA request) {
+    public ResponseEntity<String> request2FACode(@Valid @RequestBody Request2FA request) {
 
         String generatedCode = twoFactorAuthService.sendCode(request.getUserId());
         return ResponseEntity.ok("2FA code sent: " + generatedCode); // Include the generated code in the response
     }
 
-    @Operation(summary = "Verify 2FA Code", description = "Verifies the provided 2FA code for the user.")
+    @Operation(summary = SUMMARY_2FA_VERIFY, description =DESCRIPTION_2FA_VERIFY )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "2FA code verification successful.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Bad request, invalid user ID or code.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "404", description = "User not found.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "500", description = "Internal server error.", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = STATUS_CODE_OK, description =DESCRIPTION_2FA_VERIFIED , content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = STATUS_CODE_BAD_REQUEST, description = DESCRIPTION_BAD_REQUEST, content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = STATUS_NOT_FOUND, description = DESCRIPTION_USER_NOT_FOUND, content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = STATUS_CODE_INTERNAL_ERROR, description = DESCRIPTION_SERVER_ERROR, content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/verify")
-    public ResponseEntity<Boolean> verify2FACode(@RequestBody Verify2FA verifyRequest) {
+    public ResponseEntity<Boolean> verify2FACode(@Valid @RequestBody Verify2FA verifyRequest) {
         boolean isValid;
         try {
 

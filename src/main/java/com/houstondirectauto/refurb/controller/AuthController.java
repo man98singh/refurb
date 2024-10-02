@@ -5,7 +5,7 @@ import com.houstondirectauto.refurb.proxy.AuthProxyService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.houstondirectauto.refurb.model.Verify2FA;
+
 
 import static com.houstondirectauto.refurb.util.Constants.*;
 

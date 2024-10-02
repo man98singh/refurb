@@ -51,6 +51,7 @@ public class Constants {
 	public static final String STATUS_AUTHORISED = "401";
 	public static final String STATUS_NOT_FOUND = "404";
 	public static final int STATUS_FORBIDDEN = 403;
+	public static final String STATUS_CODE_INTERNAL_ERROR = "500";//this one is for string
 	public static final int STATUS_ERROR = 500;
 
 	public static final String JWT_BEARER_AUTH = "jwtBearerAuth";
@@ -72,8 +73,18 @@ public class Constants {
     public static final String SORT_DIRECTION_KEY = "sortDir";
     public static final String PAGEABLE = "pageable";
 	
-	
-	
+	//Two_factor_Auth
+	public static final String DESCRIPTION_2FA_SENT = "2FA code sent successfully.";
+	public static final String DESCRIPTION_2FA_VERIFIED = "2FA code verification successful.";
+	public static final String DESCRIPTION_BAD_REQUEST = "Bad request, invalid user ID.";
+	public static final String DESCRIPTION_USER_NOT_FOUND = "User not found.";
+	public static final String DESCRIPTION_SERVER_ERROR = "Internal server error.";
+	public static final String SUMMARY_2FA_REQUEST="Requested 2FA Code";
+	public static final String DESCRIPTION_2FA_REQUEST="Generates and sends a 2FA code to the user.";
+	public static final String SUMMARY_2FA_VERIFY="Verify 2FA Code";
+	public static  final String DESCRIPTION_2FA_VERIFY="Verifies the provided 2FA code for the user.";
+
+
 	/**
 	 * Auto End Point Urls
 	 */

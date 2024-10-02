@@ -1,14 +1,13 @@
 package com.houstondirectauto.refurb.model;
 
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
+@Data
 public class Request2FA {
+    @NotNull(message = "USER ID cannot be null")
     private Integer userId;  // Change this to Integer for user ID
 
-    // Getter and setter for userId
-    public Integer getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+
 }

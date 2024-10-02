@@ -5,6 +5,7 @@ import com.houstondirectauto.refurb.exception.EntityNotFoundException; // Add th
 import com.houstondirectauto.refurb.entity.UserEntity; // Import UserEntity
 import com.houstondirectauto.refurb.exception.EntityNotFoundException; // Ensure this import is present
 import com.houstondirectauto.refurb.repository.UserRepository; // Import UserRepository
+import com.houstondirectauto.refurb.util.GenerateCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,9 @@ public class SmsTwoFactorAuthService implements TwoFactorAuthService {
     @Override
     public String sendCode(Integer userId) {
         try {
-            String code = generateCode();
+            String code = GenerateCodeUtil.generateCode();
             UserEntity user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found")); // Handle user not found
-            user.setTwoFaCode(code);
-            user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+            user.setTwoFaCode(Long.parseLong(code));
             userRepository.save(user);
             System.out.println("2FA code for user " + userId + " is: " + code);
             return code;
@@ -33,13 +33,17 @@ public class SmsTwoFactorAuthService implements TwoFactorAuthService {
     }
 
     @Override
-    public boolean verifyCode(Integer userId, String code) {
+    public boolean verifyCode(Integer userId, Long code) {
         try {
             UserEntity user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
             if (!code.equals(user.getTwoFaCode())) {
                 System.err.println("Code mismatch"); // Log the error
                 return false; // Return false
             }
+            user.setTwoFaCode(null);  //setting to null in db
+            userRepository.save(user);
+
+            System.out.println("2FA code verified and cleared for user " + userId);
             return true;
         } catch (EntityNotFoundException e) {
             System.err.println("Error: " + e.getMessage()); // Log the error
@@ -50,9 +54,5 @@ public class SmsTwoFactorAuthService implements TwoFactorAuthService {
 
 
 
-    private String generateCode() {
-        Random random = new Random();
-        int code = 100000 + random.nextInt(900000);
-        return String.valueOf(code);
-    }
+
 }
