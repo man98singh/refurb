@@ -44,10 +44,10 @@ public class TwoFactorAuthController {
             String generatedCode = twoFactorAuthService.sendCode(request.getUserId());
             return ResponseEntity.ok("2FA code sent: " + generatedCode); // Include the generated code in the response
         } catch (EntityNotFoundException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(DESCRIPTION_USER_NOT_FOUND);
         } catch (Exception e) {
 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the 2FA request.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(DESCRIPTION_2FA_REQ_SERVER_ERROR);
         }
 
     }
@@ -73,7 +73,7 @@ public class TwoFactorAuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(DESCRIPTION_USER_NOT_FOUND);
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(DESCRIPTION_2FA_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(DESCRIPTION_2FA_VER_SERVER_ERROR);
         }
     }
 }
