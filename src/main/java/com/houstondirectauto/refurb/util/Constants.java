@@ -77,7 +77,6 @@ public class Constants {
 	public static final String DESCRIPTION_2FA_SENT = "2FA code sent successfully.";
 	public static final String DESCRIPTION_2FA_VERIFIED = "2FA code verification successful.";
 	public static final String DESCRIPTION_BAD_REQUEST = "Bad request, invalid user ID.";
-	public static final String DESCRIPTION_USER_NOT_FOUND = "User not found.";
 	public static final String DESCRIPTION_SERVER_ERROR = "Internal server error.";
 	public static final String SUMMARY_2FA_REQUEST="Requested 2FA Code";
 	public static final String DESCRIPTION_2FA_REQUEST="Generates and sends a 2FA code to the user.";
