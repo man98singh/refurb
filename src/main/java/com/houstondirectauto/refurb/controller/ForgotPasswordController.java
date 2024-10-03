@@ -1,7 +1,7 @@
 package com.houstondirectauto.refurb.controller;
 
 import com.houstondirectauto.refurb.exception.EntityNotFoundException;
-import com.houstondirectauto.refurb.model.TwoFactorAuthResponse;
+import com.houstondirectauto.refurb.model.ForgotPasswordResponse;
 import com.houstondirectauto.refurb.request.ForgotPasswordRequest;
 import com.houstondirectauto.refurb.entity.UserEntity;
 import com.houstondirectauto.refurb.repository.UserRepository;
@@ -27,14 +27,14 @@ public class ForgotPasswordController {
     @Autowired
     private SmsTwoFactorAuthService smsTwoFactorAuthService;
     @Operation(summary = FORGOT_PASSWORD_REQUEST_SUMMARY, description = FORGOT_PASSWORD_REQUEST_DESCRIPTION)
-    @PostMapping("/request")
-    public ResponseEntity<TwoFactorAuthResponse> forgotPasswordRequest(@Valid @RequestBody ForgotPasswordRequest forgotPasswordRequest) {
+    @PostMapping(FORGOT_PASSWORD_REQUEST)
+    public ResponseEntity<ForgotPasswordResponse> forgotPasswordRequest(@Valid @RequestBody ForgotPasswordRequest forgotPasswordRequest) {
 
-        TwoFactorAuthResponse response = new TwoFactorAuthResponse();
+        ForgotPasswordResponse  response = new ForgotPasswordResponse();
 
         try {
             // Use the new method to find the user by both email and phone
-            UserEntity user = userRepository.findByEmailAndPhoneNumber(forgotPasswordRequest.getEmail(), forgotPasswordRequest.getPhone())
+            UserEntity user = userRepository.findByEmailAndPhoneNumber(forgotPasswordRequest.getEmail(), forgotPasswordRequest.getPhoneNumber())
                     .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_BY_EMAIL_AND_PHONE));
 
             // Generate and send 2FA code via SmsTwoFactorAuthService
@@ -52,13 +52,13 @@ public class ForgotPasswordController {
         }
     }
     @Operation(summary = FORGOT_PASSWORD_VERIFY_SUMMARY, description = FORGOT_PASSWORD_VERIFY_DESCRIPTION)
-    @PostMapping("/verify")
-    public ResponseEntity<TwoFactorAuthResponse> verifyForgotPasswordCode(@Valid @RequestBody ForgotPasswordVerifyRequest verifyRequest) {
-        TwoFactorAuthResponse response = new TwoFactorAuthResponse();
+    @PostMapping(FORGOT_PASSWORD_VERIFY)
+    public ResponseEntity<ForgotPasswordResponse> verifyForgotPasswordCode(@Valid @RequestBody ForgotPasswordVerifyRequest verifyRequest) {
+     ForgotPasswordResponse response = new ForgotPasswordResponse();
 
         try {
             // Find the user by both email and phone
-            UserEntity user = userRepository.findByEmailAndPhoneNumber(verifyRequest.getEmail(), verifyRequest.getPhone())
+            UserEntity user = userRepository.findByEmailAndPhoneNumber(verifyRequest.getEmail(), verifyRequest.getPhoneNumber())
                     .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_BY_EMAIL_AND_PHONE));
 
             // Verify the 2FA code

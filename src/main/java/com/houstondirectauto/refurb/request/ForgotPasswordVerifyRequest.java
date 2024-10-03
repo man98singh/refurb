@@ -12,8 +12,8 @@ public class ForgotPasswordVerifyRequest {
     private String email;
 
     @NotBlank(message = PHONE_REQUIRED)
-    private String phone;
+    private String phoneNumber;
 
     @NotBlank(message = CODE_REQUIRED)
-    private String Code;
+    private String code;
 }

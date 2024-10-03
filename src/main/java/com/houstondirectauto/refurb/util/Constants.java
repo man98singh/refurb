@@ -133,6 +133,8 @@ public class Constants {
 	 */
 	public static final String USERS = "/user";
 	public static final String AUTH = "/account";
+	public static final String FORGOT_PASSWORD_REQUEST= "/forgot-password/request";
+	public static final String FORGOT_PASSWORD_VERIFY= "/forgot-password/verify";
 	public static final String USER_SIGNIN = "/login";
 	public static final String USER_SOCIAL_SIGNIN = "/gmail/login";
 	public static final String USER_ID = "/{userId}";

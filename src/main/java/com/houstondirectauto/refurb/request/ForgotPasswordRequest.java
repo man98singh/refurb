@@ -17,5 +17,5 @@ public class ForgotPasswordRequest {
 
     @NotBlank(message = PHONE_REQUIRED)
     @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = INVALID_PHONE_FORMAT)
-    private String phone;
+    private String phoneNumber;
 }
