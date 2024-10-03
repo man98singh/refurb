@@ -81,6 +81,7 @@ public class Constants {
 	public static final String SUMMARY_2FA_REQUEST="Requested 2FA Code";
 	public static final String DESCRIPTION_2FA_REQUEST="Generates and sends a 2FA code to the user.";
 	public static final String SUMMARY_2FA_VERIFY="Verify 2FA Code";
+	public static final String CODE_REQUIRED = "2FA code is required";
 	public static  final String DESCRIPTION_2FA_VERIFY="Verifies the provided 2FA code for the user.";
 	public static final String DESCRIPTION_2FA_MISMATCH = "2FA code mismatch.";
 	public static final String DESCRIPTION_2FA_VER_SERVER_ERROR = "An error occurred while verifying the 2FA code.";
@@ -291,6 +292,8 @@ public class Constants {
 	public static final String EMAIL_CONTENT  = "emailContent";
 	public static final String EMAIL_VERIFICATION  = "emailVerification";
 	public static final String EMAIL_HEADING  = "emailHeading";
+	public static final String EMAIL_REQUIRED = "Email is required";
+	public static final String INVALID_EMAIL_FORMAT = "Invalid email format";
 	public static final String TEAM  = "team";
 	public static final String NOTE  = "note";
 	public static final String OUR_BEST = "ourBest";
@@ -305,4 +308,16 @@ public class Constants {
 	public static final String AUTH_TOKEN  = "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyMDE2MjU4NCwiaWF0IjoxNzIwMTYyNTg0fQ.n8WXqsPUXw1PhKkTNqiMv2wFy0s-VoDCEbZJe9DD4LQ";
 
 
+	// Forgot Password API Descriptions
+	public static final String FORGOT_PASSWORD_REQUEST_SUMMARY = "Forgot Password Request";
+	public static final String FORGOT_PASSWORD_REQUEST_DESCRIPTION = "Send reset instructions to the user's email and phone.";
+	public static final String FORGOT_PASSWORD_VERIFY_SUMMARY = "Verify Forgot Password Code";
+	public static final String FORGOT_PASSWORD_VERIFY_DESCRIPTION = "Verify the 2FA code to reset the password.";
+	//Exception
+	public static final String VERIFICATION_SUCCESS = "Verification successful. You may now reset your password.";
+	public static final String INVALID_2FA_CODE = "Invalid 2FA code.";
+	public static final String USER_NOT_FOUND_BY_EMAIL_AND_PHONE = "User with provided email and phone not found";
+	public static final String RESET_INSTRUCTIONS_SENT = "Reset instructions have been sent to your email and phone.";
+	public static final String PHONE_REQUIRED = "Phone number is required";
+	public static final String INVALID_PHONE_FORMAT = "Invalid phone number format";
 }

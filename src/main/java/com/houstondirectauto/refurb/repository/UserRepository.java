@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	public UserEntity findByEmail(String string);
 	public Optional<UserEntity> findByToken(int token);
+	Optional<UserEntity> findByEmailAndPhoneNumber(String email, String phoneNumber);
 
 
 }
