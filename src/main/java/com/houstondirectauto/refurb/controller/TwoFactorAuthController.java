@@ -85,20 +85,30 @@ public class TwoFactorAuthController {
             @ApiResponse(responseCode = STATUS_CODE_INTERNAL_ERROR, description = DESCRIPTION_SERVER_ERROR, content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/verify")
-    public ResponseEntity<String> verify2FACode(@Valid @RequestBody Verify2FA verifyRequest) {
+    public ResponseEntity<TwoFactorAuthResponse> verify2FACode(@Valid @RequestBody Verify2FA verifyRequest) {
+
+        TwoFactorAuthResponse response = new TwoFactorAuthResponse();
         try {
 
             boolean isValid = twoFactorAuthService.verifyCode(verifyRequest.getUserId(), verifyRequest.getCode());
             if (!isValid) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(DESCRIPTION_2FA_MISMATCH);
+                response.setMessage(DESCRIPTION_2FA_MISMATCH);
+                response.setSuccess(false);
+                return  new ResponseEntity<>(response,HttpStatus.BAD_REQUEST );
             }
-            return ResponseEntity.ok(DESCRIPTION_2FA_VERIFIED);
+            response.setMessage(DESCRIPTION_2FA_VERIFIED);
+            response.setSuccess(true);
+            return new ResponseEntity<>(response,HttpStatus.OK);
 
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(USER_NOT_EXIST);
+            response.setMessage(USERS_NOT_EXIST);
+            response.setSuccess(false);
+            return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(DESCRIPTION_2FA_VER_SERVER_ERROR);
+            response.setMessage(DESCRIPTION_SERVER_ERROR);
+            response.setSuccess(false);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
