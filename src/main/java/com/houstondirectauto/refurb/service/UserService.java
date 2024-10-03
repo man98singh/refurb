@@ -304,40 +304,6 @@ public class UserService implements UserDetailsService {
 //	}
 
 
-	//2FA
-	public void generateAndSave2FACode(UserEntity user) {
-		String code = generate2FACode();  // genratting the 2FA code
-		user.setTwoFaCode(Long.parseLong(code));
-		userRepository.save(user);
-		System.out.println("Generated 2FA code for user " + user.getEmail() + ": " + code); // Log the code
-	}
 
-	private String generate2FACode() {
-		Random random = new Random();
-		return String.format("%06d", random.nextInt(1000000));  // Generate a 6-digit code
-	}
-	// Verify 2FA code
-	public boolean verify2FACode(Integer userId, String inputCode) throws EntityNotFoundException {
-		UserEntity user = findById(userId);
-		Long storedCode = user.getTwoFaCode();
-
-		// Log the stored and input codes
-		System.out.println("Stored Code: " + storedCode);
-		System.out.println("Input Code: " + inputCode);
-
-		// Check if the stored 2FA code matches the input code
-		if (storedCode == null || !storedCode.equals(inputCode)) {
-			// Log the mismatch
-			System.out.println("2FA code mismatch. Stored: " + storedCode + ", Input: " + inputCode);
-			return false;  // Return false if the code doesn't match
-		}
-
-		user.setTwoFaCode(null);
-		userRepository.save(user);
-
-		// Log the successful match
-		System.out.println("2FA code matched successfully.");
-		return true;  // Return true if the code matches
-	}
 
 }

@@ -83,6 +83,9 @@ public class Constants {
 	public static final String DESCRIPTION_2FA_REQUEST="Generates and sends a 2FA code to the user.";
 	public static final String SUMMARY_2FA_VERIFY="Verify 2FA Code";
 	public static  final String DESCRIPTION_2FA_VERIFY="Verifies the provided 2FA code for the user.";
+	public static final String DESCRIPTION_2FA_MISMATCH = "2FA code mismatch.";
+	public static final String DESCRIPTION_2FA_VER_SERVER_ERROR = "An error occurred while verifying the 2FA code.";
+	public static final String DESCRIPTION_2FA_REQ_SERVER_ERROR = "An error occurred while processing the 2FA request.";
 
 
 	/**

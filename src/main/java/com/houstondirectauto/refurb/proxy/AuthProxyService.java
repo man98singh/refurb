@@ -11,6 +11,8 @@ import com.houstondirectauto.refurb.model.User;
 import com.houstondirectauto.refurb.model.UserDTO;
 import com.houstondirectauto.refurb.request.CreateUserRequest;
 import com.houstondirectauto.refurb.request.RoleRequest;
+import com.houstondirectauto.refurb.service.SmsTwoFactorAuthService;
+import com.houstondirectauto.refurb.service.TwoFactorAuthService;
 import com.houstondirectauto.refurb.service.UserService;
 import com.houstondirectauto.refurb.util.MapperUtil;
 import com.houstondirectauto.refurb.util.WebUtil;
@@ -36,6 +38,7 @@ import static com.houstondirectauto.refurb.util.Constants.*;
 public class AuthProxyService {
 
 	private final UserService userService;
+
 //	private final MailService mailService;
 	private final AuthenticationManager authenticationManager;
 	private final JwtTokenUtil jwtTokenUtil;
@@ -56,6 +59,7 @@ public class AuthProxyService {
 		this.userService = userService;
 		this.authenticationManager = authenticationManager;
 		this.jwtTokenUtil = jwtTokenUtil;
+
 	}
 
 	public UserDTO getCreateAuthenticationToken(String email,String password,String type) throws UsernameNotFoundException, UnauthorizedException, EntityNotFoundException {
@@ -68,12 +72,6 @@ public class AuthProxyService {
 	if(!type.equals(SOCIAL_TYPE)) {
 		authenticate(email, password);
 	}
-	// 2fa logic
-	if (user.getTwoFaCode() == null || user.getTwoFaCode()==0) {
-			userService.generateAndSave2FACode(user);  // genrating and saving against user ID
-
-		throw new UnauthorizedException("2FA code sent. Please provide the code.");
-		}
 
 	final UserDetails userDetails = userService.loadUserByUsername(email);
 
@@ -109,8 +107,5 @@ public class AuthProxyService {
 			throw new UnauthorizedException(INVALID_CREADTIALS);
 		}
 	}
-	public boolean verify2FACode(Integer userId, String inputCode) throws EntityNotFoundException {
-		UserEntity user = userService.findById(userId); // fetching userid
-		return userService.verify2FACode(user.getId(), inputCode);
-	}
+
 }
