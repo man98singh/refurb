@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
+import java.util.Random;
 import com.houstondirectauto.refurb.entity.RoleEntity;
 import com.houstondirectauto.refurb.entity.UserEntity;
 import com.houstondirectauto.refurb.exception.BadRequestException;
@@ -76,6 +76,7 @@ public class UserService implements UserDetailsService {
 			throw new BadRequestException(EMAIL_ALREADY_EXIST);
 		}
 		userEntity.setPassword(bcryptEncoder.encode(userEntity.getPassword()));
+
 		log.info("aaaaaaaaaaaa");
 		log.info(userEntity.getPassword());
 
@@ -301,5 +302,8 @@ public class UserService implements UserDetailsService {
 //	public List<UserModuleProjection> getAllUserModules(Integer id){
 //		return userModulePermissionRepository.getAllUserModules(id);
 //	}
+
+
+
 
 }

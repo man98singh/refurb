@@ -11,6 +11,8 @@ import com.houstondirectauto.refurb.model.User;
 import com.houstondirectauto.refurb.model.UserDTO;
 import com.houstondirectauto.refurb.request.CreateUserRequest;
 import com.houstondirectauto.refurb.request.RoleRequest;
+import com.houstondirectauto.refurb.service.SmsTwoFactorAuthService;
+import com.houstondirectauto.refurb.service.TwoFactorAuthService;
 import com.houstondirectauto.refurb.service.UserService;
 import com.houstondirectauto.refurb.util.MapperUtil;
 import com.houstondirectauto.refurb.util.WebUtil;
@@ -36,6 +38,7 @@ import static com.houstondirectauto.refurb.util.Constants.*;
 public class AuthProxyService {
 
 	private final UserService userService;
+
 //	private final MailService mailService;
 	private final AuthenticationManager authenticationManager;
 	private final JwtTokenUtil jwtTokenUtil;
@@ -56,17 +59,20 @@ public class AuthProxyService {
 		this.userService = userService;
 		this.authenticationManager = authenticationManager;
 		this.jwtTokenUtil = jwtTokenUtil;
+
 	}
 
 	public UserDTO getCreateAuthenticationToken(String email,String password,String type) throws UsernameNotFoundException, UnauthorizedException, EntityNotFoundException {
 
 	UserEntity user = userService.findByUsername(email);
+
 	if(Objects.nonNull(user) && !user.getUserStatus().equals(UserStatus.ACTIVE)) {
 		throw new UnauthorizedException(ACC_NOT_ACT);
 	}
 	if(!type.equals(SOCIAL_TYPE)) {
 		authenticate(email, password);
 	}
+
 	final UserDetails userDetails = userService.loadUserByUsername(email);
 
 	UserDTO jwtResponse = new UserDTO();
@@ -101,4 +107,5 @@ public class AuthProxyService {
 			throw new UnauthorizedException(INVALID_CREADTIALS);
 		}
 	}
+
 }

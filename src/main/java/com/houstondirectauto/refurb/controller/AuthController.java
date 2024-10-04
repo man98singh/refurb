@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import static com.houstondirectauto.refurb.util.Constants.*;
 
 //import java.io.IOException;
@@ -68,5 +69,6 @@ public class AuthController {
             throws Exception {
         return new ResponseEntity<>(authProxyService.getCreateAuthenticationToken(signInRequest.getEmail(),signInRequest.getPassword(),NORMAL_TYPE), HttpStatus.OK);
     }
+
 
 }
