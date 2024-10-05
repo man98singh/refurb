@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Data
 public class SignInRequest {
-	@NotBlank(message= Constants.EMAIL_IS_MANDATORY)
-	private String email;
+	@NotBlank(message= Constants.USERNAME_IS_MANDATORY)
+	private String username;
 	
 	@NotBlank(message= Constants.PASSWORD_IS_MANDATORY)
 	private String password;

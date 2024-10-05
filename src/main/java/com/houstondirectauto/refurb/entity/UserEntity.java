@@ -21,7 +21,6 @@ import jakarta.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -31,43 +30,40 @@ import lombok.EqualsAndHashCode;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "users")
 public class UserEntity extends AbstractTimestampEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
-	private String email;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private String phoneNumber;
-	@Column(length = 500)
-	private String image;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
     private String location;
     private String smartSheetId;
     private String lift;
     private String idmsId;
     private String pinCode;
     private String rfIdBadgeId;
-	private Integer token;
-	@Column(name = "2FACode", length = 6)
-	private Long twoFaCode;
+    private Integer token;
 
+    @Column(length = 500)
+    private String image;
 
-	@Column(length = 15, columnDefinition = "varchar(15) default 'ACTIVE'")
-	@Enumerated(EnumType.STRING)
-	private UserStatus userStatus;
+    @Column(columnDefinition = "boolean default true")
+    private Boolean twoFactorEnabled;
 
-	@ManyToMany(targetEntity = RoleEntity.class, cascade = CascadeType.MERGE)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	@NotNull(message = "role is required")
-	private Set<RoleEntity> roles;
+    @Column(name = "twoFactorSecret", length = 6)
+    private Integer twoFactorSecret;
 
+    @Column(length = 15, columnDefinition = "varchar(15) default 'ACTIVE'")
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus;
 
+    @ManyToMany(targetEntity = RoleEntity.class, cascade = CascadeType.MERGE)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @NotNull(message = "role is required")
+    private Set<RoleEntity> roles;
 }
-
