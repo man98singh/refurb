@@ -1,41 +1,20 @@
 package com.houstondirectauto.refurb.controller;
 
-import com.houstondirectauto.refurb.UserStatus;
-import com.houstondirectauto.refurb.entity.UserEntity;
 import com.houstondirectauto.refurb.exception.EntityNotFoundException;
-import com.houstondirectauto.refurb.exception.UnauthorizedException;
-import com.houstondirectauto.refurb.filter.JwtTokenUtil;
 import com.houstondirectauto.refurb.model.Request2FA;
 import com.houstondirectauto.refurb.model.TwoFactorAuthResponse;
-import com.houstondirectauto.refurb.model.UserDTO;
 import com.houstondirectauto.refurb.model.Verify2FA;
-import com.houstondirectauto.refurb.request.RoleRequest;
 import com.houstondirectauto.refurb.service.TwoFactorAuthService;
-import com.houstondirectauto.refurb.service.UserService;
-import com.houstondirectauto.refurb.util.MapperUtil;
-import com.houstondirectauto.refurb.util.WebUtil;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static com.houstondirectauto.refurb.util.Constants.*;
 

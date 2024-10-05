@@ -21,14 +21,16 @@ public class SmsTwoFactorAuthService implements TwoFactorAuthService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         // Generate 2FA code
-        String code = GenerateCodeUtil.generateCode();
-        user.setTwoFaCode(Long.parseLong(code));  // Store the generated code
+        int code = GenerateCodeUtil.generateCode();
+//        user.setTwoFactorSecret(code);  // Store the generated code
         userRepository.save(user);  // Save the user entity with updated 2FA code
 
         // Log and return the generated 2FA code
         System.out.println("2FA code for user " + userId + " is: " + code);
-        return code;
+//        return code;
+        return null;
     }
+
 
     // Verify the 2FA code for the user
     @Override
@@ -38,13 +40,13 @@ public class SmsTwoFactorAuthService implements TwoFactorAuthService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         // Check if the provided code matches the stored 2FA code
-        if (!code.equals(user.getTwoFaCode())) {
+        if (!code.equals(user.getTwoFactorSecret())) {
             System.err.println("2FA code mismatch for user " + userId);
             return false;  // Return false if the codes do not match
         }
 
         // Clear the 2FA code after successful verification
-        user.setTwoFaCode(null);
+        user.setTwoFactorSecret(null);
         userRepository.save(user);  // Save the updated user entity
 
         System.out.println("2FA code verified and cleared for user " + userId);
@@ -54,7 +56,7 @@ public class SmsTwoFactorAuthService implements TwoFactorAuthService {
     // Generate and Save 2FA code (from UserService, now moved here)
     public void generateAndSave2FACode(UserEntity user) {
         String code = generate2FACode();
-        user.setTwoFaCode(Long.parseLong(code));  // Save the generated code to the user entity
+//        user.setTwoFactorSecret(Long.parseLong(code));  // Save the generated code to the user entity
         userRepository.save(user);
         System.out.println("Generated 2FA code for user " + user.getEmail() + ": " + code);
     }
@@ -69,15 +71,15 @@ public class SmsTwoFactorAuthService implements TwoFactorAuthService {
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        Long storedCode = user.getTwoFaCode();  // Get the stored 2FA code
+//        Long storedCode = user.getTwoFactorSecret();  // Get the stored 2FA code
 
         // Check if the stored code matches the input code
-        if (storedCode == null || !storedCode.equals(Long.parseLong(inputCode))) {
-            System.err.println("2FA code mismatch for user " + userId);
-            return false;
-        }
+//        if (storedCode == null || !storedCode.equals(Long.parseLong(inputCode))) {
+//            System.err.println("2FA code mismatch for user " + userId);
+//            return false;
+//        }
 
-        user.setTwoFaCode(null);  // Clear the 2FA code after successful verification
+        user.setTwoFactorSecret(null);  // Clear the 2FA code after successful verification
         userRepository.save(user);  // Save the user entity
         System.out.println("2FA code matched successfully for user " + userId);
         return true;

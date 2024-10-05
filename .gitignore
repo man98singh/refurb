@@ -30,7 +30,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-refurbLog.log
+refurbLog.*
 **/*.log
 
 ### VS Code ###

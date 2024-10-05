@@ -132,10 +132,10 @@ public class Constants {
 	 * User End Point Urls
 	 */
 	public static final String USERS = "/user";
-	public static final String AUTH = "/account";
+	public static final String AUTH = "/api/auth";
 	public static final String FORGOT_PASSWORD_REQUEST= "/forgot-password/request";
 	public static final String FORGOT_PASSWORD_VERIFY= "/forgot-password/verify";
-	public static final String USER_SIGNIN = "/login";
+	public static final String USER_SIGNIN = "/signin";
 	public static final String USER_SOCIAL_SIGNIN = "/gmail/login";
 	public static final String USER_ID = "/{userId}";
 	public static final String USERS_ID = "userId";
@@ -275,6 +275,7 @@ public class Constants {
 	public static final String EMPTY_STRING = " ";
 	public static final String RULE_IS_MANDATORY ="Rule is mandatory";
 	public static final String EMAIL_IS_MANDATORY ="Email is mandatory";
+	public static final String USERNAME_IS_MANDATORY ="Username is mandatory";
 	public static final String PASSWORD_IS_MANDATORY ="Password is mandatory";
 	public static final String NAME_IS_MANDATORY ="Name is mandatory";
 	public static final String LATITUDE_IS_MANDATORY ="Latitude is mandatory";

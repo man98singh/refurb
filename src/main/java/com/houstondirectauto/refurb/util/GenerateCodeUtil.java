@@ -1,11 +1,10 @@
 package com.houstondirectauto.refurb.util;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class GenerateCodeUtil {
-    public static String generateCode() {
-        Random random = new Random();
-        int code = 100000 + random.nextInt(900000);
-        return String.valueOf(code);
+    public static int generateCode() {
+        SecureRandom random = new SecureRandom();
+        return 100000 + random.nextInt(900000);
     }
 }

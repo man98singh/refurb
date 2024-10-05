@@ -76,8 +76,8 @@ public class SecurityConfig {
                         .requestMatchers("/readiness_check").permitAll()
                         .requestMatchers("/liveness_check").permitAll()
                         .requestMatchers("/_ah/start").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/file/**", "/file/*", "/account/login", "/welcome", "/user**", "/user/**","/role**", "/role/**","/vendor**", "/vendor/**",
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/file/**", "/file/*", "/welcome", "/user**", "/user/**","/role**", "/role/**","/vendor**", "/vendor/**",
                                 "/user/verify/**", "/user/verify/otp/**", "/user/account/password", "/user/*",  "/file/upload",
                                 "/file/**").permitAll()
                         .anyRequest()
