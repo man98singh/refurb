@@ -70,13 +70,14 @@ public class SecurityConfig {
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exp -> exp.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .cors(c -> corsConfigurationSource())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/readiness_check").permitAll()
                         .requestMatchers("/liveness_check").permitAll()
                         .requestMatchers("/_ah/start").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/file/**", "/file/*", "/account/login", "/welcome", "/user**", "/user/**","/role**", "/role/**","/vendor**", "/vendor/**",
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/file/**", "/file/*", "/welcome", "/user**", "/user/**","/role**", "/role/**","/vendor**", "/vendor/**",
                                 "/user/verify/**", "/user/verify/otp/**", "/user/account/password", "/user/*",  "/file/upload",
                                 "/file/**").permitAll()
                         .anyRequest()
@@ -93,7 +94,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of("http://localhost:3000","*"));
-        configuration.setAllowedMethods(List.of("GET","POST"));
+        configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

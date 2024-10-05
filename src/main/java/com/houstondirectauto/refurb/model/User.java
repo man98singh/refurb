@@ -31,4 +31,6 @@ public class User {
 	private String rfIdBadgeId;
 	private UserStatus userStatus;
 	private Set<RoleRequest> roles;
+	private String twoFaCode;
+	private boolean isTwoFaEnabled;
 }
