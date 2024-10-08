@@ -50,7 +50,8 @@ public class AuthProxyService {
 
         SignInResponse signInResponse = new SignInResponse();
 
-        if (user.getTwoFactorEnabled()) {
+        Boolean twoFactorEnabled = user.getTwoFactorEnabled();
+        if (twoFactorEnabled != null && twoFactorEnabled) {
             int code = GenerateCodeUtil.generateCode();
 
             user.setTwoFactorSecret(code);

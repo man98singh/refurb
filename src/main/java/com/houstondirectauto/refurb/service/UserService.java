@@ -1,5 +1,6 @@
 package com.houstondirectauto.refurb.service;
 
+import static com.houstondirectauto.refurb.util.Constants.EMAIL_ALREADY_EXIST;
 import static com.houstondirectauto.refurb.util.Constants.USER_NOT_EXIST;
 
 import java.util.*;
@@ -11,6 +12,7 @@ import com.houstondirectauto.refurb.exception.EntityNotFoundException;
 import com.houstondirectauto.refurb.repository.UserRepository;
 import com.houstondirectauto.refurb.request.UpdateUserRequest;
 import com.houstondirectauto.refurb.util.Constants;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -68,18 +70,18 @@ public class UserService implements UserDetailsService {
      * @return UserEntity userEntity.
      */
     public UserEntity createUser(UserEntity userEntity) throws BadRequestException {
-//        UserEntity user = userRepository.findByEmail(userEntity.getEmail());
-//        if (Objects.nonNull(user)) {
-//            log.error("email id Already exist.");
-//            throw new BadRequestException(EMAIL_ALREADY_EXIST);
-//        }
-//        userEntity.setPassword(bcryptEncoder.encode(userEntity.getPassword()));
-//
-//        log.info("aaaaaaaaaaaa");
-//        log.info(userEntity.getPassword());
-//
-//        return userRepository.save(userEntity);
-        return null;
+        Optional<UserEntity> user = userRepository.findByEmail(userEntity.getEmail());
+        if (user.isPresent()) {
+            log.error("email id Already exist.");
+            throw new BadRequestException(EMAIL_ALREADY_EXIST);
+        }
+        userEntity.setPassword(bcryptEncoder.encode(userEntity.getPassword()));
+
+        log.info("aaaaaaaaaaaa");
+        log.info(userEntity.getPassword());
+
+        return userRepository.save(userEntity);
+
     }
 
 //	/**
