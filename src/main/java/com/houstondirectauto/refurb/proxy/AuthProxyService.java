@@ -82,6 +82,7 @@ public class AuthProxyService {
         signInResponse.setRequires2FA(false);
         signInResponse.setUser(userDTO);
         //TODO: We have to create token using JWT
+        
         signInResponse.setToken(WebUtil.encode(user.getEmail()));
 
         return signInResponse;
